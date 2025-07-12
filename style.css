@@ -28,15 +28,23 @@ body {
   }
   to {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(150px);
   }
 }
 
 .slide-out {
-  animation: slideLeftFade 0.4s ease forwards;
+  animation: slideLeftFade 0.9s ease forwards;
 }
 .main {
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
+  height: max-content;
+  background-image: url(./assets/logo.png);
+  /* object-fit: cover; */
+  background-repeat: no-repeat;
+  /* background-position: center top; */
+  background-size: cover; /*or cover if you want it to fill
+  background-color: rgba(0, 0, 0, 0.8); /* optional overlay for readability */
+  backdrop-filter: blur(5px);
   color: var(--color-secondary);
   display: flex;
   flex-direction: column;
@@ -149,11 +157,14 @@ input {
   height: 32px;
   position: relative;
   left: -50px;
+  display: flex;
   margin-top: 10px;
   border-radius: 4px;
   /* height: fit-content; */
   transform: translateX(3rem);
-  background-color: rgb(61, 48, 61);
+  /* transform: translateY(-3rem, ease-in, smooth); */
+  /* background-color: var(--color-primary); */
+  background-color: rgba(0, 0, 0, 0.7);
   width: 19rem;
 }
 .modalTitle {
@@ -532,4 +543,48 @@ input {
   left: 0;
 
   height: 42rem;
+}
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.85px;
+  pointer-events: none;
+}
+.input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  width: 15px;
+  top: 5px;
+  left: 10px;
+  height: 15px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 2px;
+  opacity: 0;
+}
+
+/* Show the checkmark when checkbox is checked */
+.input[type="checkbox"]:checked + .custom-checkbox::after {
+  opacity: 1;
 }

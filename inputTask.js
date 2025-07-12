@@ -186,14 +186,13 @@ class task {
   renderTask(data, pos) {
     const id = data && data.id ? data.id : `${Date.now()}`;
     const html = `<div class="workout" data-id="${id}">
-      <label class="checkbox-btn">
-      <label for="checkbox"></label>
-      <input id="checkbox" type="checkbox" />
-      <span class="checkmark"></span>
-      </label>
-      <h4 class = "data" >${
-        this.data.length > 21 ? this.data.slice(0, 21) + "..." : this.data
-      }</h4>
+<!-- From Uiverse.io by PriyanshuGupta28 --> 
+<label id="checkbox">
+    <input type="checkbox" class="input">
+    <span class="custom-checkbox"></span>
+  </label><h4 class = "data" >${
+    this.data.length > 21 ? this.data.slice(0, 21) + "..." : this.data
+  }</h4>
         
         </div>`;
     // console.log(remDays);
