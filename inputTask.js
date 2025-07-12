@@ -29,6 +29,22 @@ const arrMonths = [
   "november",
   "december",
 ];
+window.addEventListener("load", () => {
+  if ("Notification" in window && Notification.permission !== "granted") {
+    Notification.requestPermission().then((permission) => {
+      console.log("Notification permission:", permission);
+    });
+  }
+});
+function showNotification(title) {
+  if (Notification.permission === "granted") {
+    new Notification("⏰ Deadline Reached!", {
+      body: `Task: ${title}`,
+      icon: "⏰",
+    });
+  }
+}
+
 function saveWorkoutsToLocalStorage() {
   localStorage.setItem("workouts", JSON.stringify(workouts));
 }
@@ -53,11 +69,12 @@ function startCountdown(id, timestamp) {
       return;
     }
 
-    // if (diff <= 0) {
-    //   deadlineEl.textContent = "⏰ Deadline reached!";
-    //   clearInterval(interval);
-    //   return;
-    // }
+    if (diff <= 0) {
+      showNotification(task.title);
+      //   deadlineEl.textContent = "⏰ Deadline reached!";
+      //   clearInterval(interval);
+      //   return;
+    }
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -169,7 +186,6 @@ class task {
   renderTask(data, pos) {
     const id = data && data.id ? data.id : `${Date.now()}`;
     const html = `<div class="workout" data-id="${id}">
-      <!-- From Uiverse.io by boryanakrasteva -->
       <label class="checkbox-btn">
       <label for="checkbox"></label>
       <input id="checkbox" type="checkbox" />
@@ -300,6 +316,7 @@ class Modal extends task {
 
         if (diff <= 0) {
           deadline.textContent = "⏰ Deadline reached!";
+          showNotification(task.title);
           clearInterval(this._intervalId);
           return;
         }
